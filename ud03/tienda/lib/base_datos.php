@@ -3,7 +3,7 @@
 function get_conexion(){
     $conexion = new mysqli('localhost','root','1234');
     // Comprobar la conexión
-    $error = $conexion->connect_error;
+    $error = $conexion->connect_errno;
     if($error != null){
         die("Fallo en la conexión: ".$conexion->connect_error. "con número". $error);
     }
@@ -13,7 +13,7 @@ function get_conexion(){
 
 function seleccionar_bd_tienda($conexion){
     $conexion->select_db("tienda");
-    
+
 }
 function crear_bd_tienda($conexion){
     $sql = "CREATE DATABASE IF NOT EXISTS tienda";
@@ -25,12 +25,13 @@ function crear_bd_tienda($conexion){
 }
 
 function crear_tabla_usuario($conexion){
-    $sql = "CREATE TABLE IF NOT EXISTS usuarios(
+    $sql = "CREATE TABLE IF NOT EXISTS usuarios (
         id INT AUTO_INCREMENT PRIMARY KEY,
-        nombre VARCHAR(50) NOT NULL,
-        apellido VARCHAR(100) NOT NULL,
+        nombre VARCHAR(50),
+        apellido VARCHAR(100),
         edad INT,
-        provincia VARCHAR(50)";
+        provincia VARCHAR(50)
+        )";
 
 if($conexion->query($sql)){
     echo "Tabla creada correctamente";
