@@ -12,16 +12,15 @@
 <body>
     <h1>Alta de usuario </h1>
     <?php
-        /*if (isset($_POST["nombre"], $_POST["apellidos"])) {
-            $nombre = $_POST['nombre'];
-            $apellidos = $_POST['nombre'];
+        if (isset($_POST["fname"], $_POST["lname"],$_POST["age"],$_POST["state"])) {
+            $nombre = $_POST['fname'];
+            $apellidos = $_POST['lname'];
+            $edad = $_POST['age'];
+            $provincia = $_POST['state'];
 
-            $conexion = get_conextion();
-
-            $conextion->executeQuery("INSERT INTO usuarios (nombre, apellidos) VALUES (" . $nombre . ", " . $apellidos . ")")
+            include("lib/base_datos.php");
+            insertar_usuario($conexion);
         }
-        */
-        //echo 'HOLA ' . ($_POST['fname'] ?? null) . '!';
         
         //Comprobar se veñen datos polo $_POST
         //Conexión
@@ -35,11 +34,16 @@
 
     <p>Formulario de alta</p>
     <form action="dar_de_alta.php" method="post">
-    <label for="fname">First name:</label>
-  <input type="text" id="fname" name="fname"><br><br>
-  <label for="lname">Last name:</label>
-  <input type="text" id="lname" name="lname"><br><br>
-  <input type="submit" value="Submit">
+        <label for="fname">Nombre:</label>
+            <input type="text" id="fname" name="fname"><br><br>
+        <label for="lname">Apellidos:</label>
+            <input type="text" id="lname" name="lname"><br><br>
+        <label for="age">Edad:</label>
+            <input type="text" id="age" name="age"><br><br>
+        <label for="state">Provincia:</label>
+            <input type="text" id="state" name="state"><br><br>
+
+            <input type="submit" value="Guardar">
     </form>
     <!-- o "action" chama a dar_de_alta.php de xeito reflexivo-->
     

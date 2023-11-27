@@ -25,6 +25,8 @@
     <p>
         <a class="btn btn-primary" href="dar_de_alta.php" role="button"> Alta usuarios</a>
         <a class="btn btn-primary" href="listar.php" role="button"> Listar usuarios</a>
+        <a class="btn btn-primary" href="editar.php" role="button"> Editar usuarios</a>
+        <a class="btn btn-primary" href="borrar.php" role="button"> Borrar usuarios</a>
     </p>
     <footer>
         <p>

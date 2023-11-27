@@ -33,10 +33,31 @@ function crear_tabla_usuario($conexion){
         provincia VARCHAR(50)
         )";
 
-if($conexion->query($sql)){
-    echo "Tabla creada correctamente";
-}else{
-    echo "Error a la hora de crear la tabla".$conexion->error;
-}
+    if($conexion->query($sql)){
+        echo "Tabla creada correctamente";
+    }else{
+        echo "Error a la hora de crear la tabla".$conexion->error;
+    }
     
+}
+
+function   insertar_usuario($conexion){
+        $conexion = get_conexion();
+        crear_bd_tienda($conexion);
+        seleccionar_bd_tienda($conexion);
+        crear_tabla_usuario($conexion);
+
+        $sql = "INSERT INTO usuarios (nombre, apellidos, edad, provincia)
+        VALUES ($nombre, $apellidos, $edad, $provincia);";
+
+        if($conexion->query($sql)){
+            echo "Se ha creado un nuevo registro correctamente";
+        }else{
+            echo "Error a la hora de crear nuevo registro".$conexion->error;
+        }
+        cerrar_conexion($conexion);
+}
+
+function cerrar_conexion($conexion){
+    $conexion->close();
 }
