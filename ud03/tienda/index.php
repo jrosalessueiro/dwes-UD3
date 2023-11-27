@@ -13,9 +13,9 @@
     <?php
         include("lib/base_datos.php");
         $conexion = get_conexion();
-        //crear_bd_tienda($conexion);
-        //seleccionar_bd_tienda($conexion);
-        //crear_tabla_usuario($conexion);
+        crear_bd_tienda($conexion);
+        seleccionar_bd_tienda($conexion);
+        crear_tabla_usuario($conexion);
 
     ?>
     <h1>Tienda IES San Clemente</h1>
