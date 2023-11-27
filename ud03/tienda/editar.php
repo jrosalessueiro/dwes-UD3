@@ -12,20 +12,47 @@
 <body>
     <h1>Editar usuario </h1>
     <?php
-        //Obter id de $_GET
-        //Conexión
-        //Seleccionar bd
-        //Consultar datos de ese id
+        include("lib/base_datos.php");
+        $conexion = get_conexion();
+        seleccionar_bd_tienda($conexion);
 
-        //Obter os datos de $_POST
-        //Executar UPDATE
+        if (isset($_POST["identity"], $_POST["fname"], $_POST["lname"],$_POST["age"],$_POST["state"])) {
+            $id = $_POST["identity"];
+            $nombre = $_POST['fname'];
+            $apellidos = $_POST['lname'];
+            $edad = $_POST['age'];
+            $provincia = $_POST['state'];
+
+            actualizar_usuario($conexion,$id,$nombre,$apellidos,$edad,$provincia);
+            $usuario = [
+                "id" => $id,
+                "nombre" => $nombre,
+                "apellido" => $apellidos,
+                "edad" => $edad,
+                "provincia" => $provincia,
+            ];
+        }
+        else if (isset($_GET["id"])) {
+            $usuario = obtener_usuario($conexion, $_GET["id"]);
+        }
     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
     </script>
 
-    <p>Formulario de edición</p>
-    <!-- o "action" chama a editar.php de xeito reflexivo-->
+    <p>Formulario de edicion</p>
+    <form action="editar.php" method="post">
+        <label for="fname">Nombre:</label>
+            <input type="text" id="fname" name="fname" value=<?php echo $usuario["nombre"]; ?>><br><br>
+        <label for="lname">Apellidos:</label>
+            <input type="text" id="lname" name="lname" value=<?php echo $usuario["apellido"]; ?>><br><br>
+        <label for="age">Edad:</label>
+            <input type="text" id="age" name="age" value=<?php echo $usuario["edad"]; ?>><br><br>
+        <label for="state">Provincia:</label>
+            <input type="text" id="state" name="state" value=<?php echo $usuario["provincia"]; ?>><br><br>
+            <input type="hidden" id="identity" name="identity" value=<?php echo $usuario["id"]; ?>>
+            <input type="submit" value="Actualizar">
+    </form>
     
     <footer>
         <p>

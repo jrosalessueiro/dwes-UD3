@@ -11,12 +11,20 @@
 
 <body>
     <h1>Borrar usuario </h1>
+    
     <?php
-        //Obter conexión
-//Seleccionar a bd
-//Ler o id de $_GET
-//Executar consulta de borrado (delete)
 
+if (isset($_GET["id"])) {
+    
+
+    $busqueda = $_GET["id"];
+
+    include("lib/base_datos.php");
+    $conexion = get_conexion();
+    seleccionar_bd_tienda($conexion);
+    borrar_usuario($conexion,$busqueda);
+}
+  
     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">

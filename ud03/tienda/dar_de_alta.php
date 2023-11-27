@@ -19,14 +19,12 @@
             $provincia = $_POST['state'];
 
             include("lib/base_datos.php");
-            insertar_usuario($conexion);
+            $conexion = get_conexion();
+            seleccionar_bd_tienda($conexion);
+
+            insertar_usuario($conexion,$nombre,$apellidos,$edad,$provincia);
         }
         
-        //Comprobar se veñen datos polo $_POST
-        //Conexión
-        //Seleccionar bd
-        //Executar o INSERT
-        //$connection->execute("INSERT INTO usuarios (nombre, apellidos) VALUES $POST[09")
     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">

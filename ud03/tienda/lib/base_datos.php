@@ -41,23 +41,44 @@ function crear_tabla_usuario($conexion){
     
 }
 
-function   insertar_usuario($conexion){
-        $conexion = get_conexion();
-        crear_bd_tienda($conexion);
-        seleccionar_bd_tienda($conexion);
-        crear_tabla_usuario($conexion);
-
-        $sql = "INSERT INTO usuarios (nombre, apellidos, edad, provincia)
-        VALUES ($nombre, $apellidos, $edad, $provincia);";
+function insertar_usuario($conexion,$nombre,$apellidos,$edad,$provincia){
+           
+        $sql = "INSERT INTO usuarios (nombre, apellido, edad, provincia)
+        VALUES ('$nombre', '$apellidos', '$edad', '$provincia');";
 
         if($conexion->query($sql)){
             echo "Se ha creado un nuevo registro correctamente";
         }else{
             echo "Error a la hora de crear nuevo registro".$conexion->error;
         }
-        cerrar_conexion($conexion);
 }
 
 function cerrar_conexion($conexion){
     $conexion->close();
+}
+
+function borrar_usuario($conexion,$busqueda){
+    
+    $sql = "DELETE FROM usuarios WHERE id=$busqueda";
+    if($conexion->query($sql)){
+        echo "Se ha borrado un registro correctamente";
+    }else{
+        echo "Error a la hora de borrar un registro".$conexion->error;
+    }
+}
+
+function obtener_usuario($conexion, $id){
+    $sql = "SELECT * FROM usuarios WHERE id = $id";
+
+    $resultado = $conexion->query($sql);
+    return $resultado->fetch_assoc();
+}
+
+function actualizar_usuario($conexion,$id,$nombre,$apellidos,$edad,$provincia){
+    $sql = "UPDATE usuarios SET nombre='$nombre', apellido='$apellidos', edad='$edad', provincia='$provincia' WHERE id=$id";
+    if($conexion->query($sql)){
+        echo "Se ha actualizado un registro correctamente";
+    }else{
+        echo "Error a la hora de actualizar un registro".$conexion->error;
+    }
 }
