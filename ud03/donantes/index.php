@@ -1,15 +1,23 @@
 <?php
-$servername = "server";
-$username = "sergas";
+$servername = "db";
+$username = "root";
 $password = "1234";
 
-//Creamos la conexión
-$connection = new mysqli($servername, $username, $password);
+try {
+    //Creamos la conexión
+    $connection = new PDO("mysql:hodt=$servername;dbname=dbname", $username, $password);
 
-//Verificamos la conexión 
-if ($connection->connect_error) {
-    die("Conexión fallida: " . $connection->connect_error);
+    // Forzamos excepciones
+    $connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    echo "Conexión correcta";
+} catch (PDOException $exc) {
+    echo "Conexión fallida: " . $exc->getMessage();
 }
+
+
+
+
+
 
 //Creamos la Base de Datos si no existe
 $queryCreateDB = "CREATE DATABASE IF NOT EXISTS $donacion";
@@ -35,13 +43,19 @@ if ($connection->query($queryCreateTable1) === TRUE) {
 $queryCreateTable2 = "CREATE TABLE IF NOT EXISTS historico(Donante INT, FOREIGN KEY(Donante) REFERENCES donantes(id), 
 Fecha_Donacion DATE(10), Proxima_Donacion DATE(10) AS (DATE_ADD(Fecha_Donacion, INTERVAL 4 MONTH))";
 
-if ($connection->query($queryCreateTable1) === TRUE) {
-    echo "Tabla 'donantes' ha sido creada correctamente o ya existe. <br>";
+if ($connection->query($queryCreateTable2) === TRUE) {
+    echo "Tabla 'historico' ha sido creada correctamente o ya existe. <br>";
 } else {
-    echo "Error al crear la Tabla 'donantes'." . $connection->error . "<br>";
+    echo "Error al crear la Tabla 'historico'." . $connection->error . "<br>";
 }
 
+$queryCreateTable3 = "CREATE TABLE IF NOT EXISTS administradores(Nombre_usuario VARCHAR(50) PRIMARY KEY, contrasena VARCHAR(200) NOT NULL)";
 
+if ($connection->query($queryCreateTable3) === TRUE) {
+    echo "Tabla 'administradores' ha sido creada correctamente o ya existe. <br>";
+} else {
+    echo "Error al crear la Tabla 'administradores'." . $connection->error . "<br>";
+}
 
 ?>
 
