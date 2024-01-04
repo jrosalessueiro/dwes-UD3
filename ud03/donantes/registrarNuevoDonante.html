@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="ES-es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" width="device-width initial-scale=1.0">
+    <title>Registro de Donantes</title>
+</head>
+
+<body>
+    <!--Action: especifica la acción asociada al formulario. 
+        Method: indica el método de acceso de la acción del formulario.
+        Enctype: determina el tipo de codificación nombre/valor.-->
+    <form action="validar.php" method="post">
+        <label for="nombre">Nombre:</label>
+        <input type="text" name="nombre" placeholder="nombre" required><br><br>
+
+        <label for="edad">Edad:</label>
+        <input type="number" name="edad" placeholder=18 required><br><br>
+
+        <label for="grupoSanguineo">Grupo Sanguíneo:</label>
+        <select name="grupo">
+            <option value="0-">0-</option>
+            <option value="0+">0+</option>
+            <option value="A-">A-</option>
+            <option value="A+">A+</option>
+            <option value="B-">B-</option>
+            <option value="B+">B+</option>
+            <option value="AB-">AB-</option>
+            <option value="AB+">AB+</option>
+        </select><br><br>
+
+        <label for="codigoPostal">Código Postal:</label>
+        <input type="text" name="cp" placeholder="-----" required><br><br>
+
+        <label for="telefono">Teléfono Móvil:</label>
+        <input type="text" name="telefono" placeholder="6--------" required><br><br>
+
+
+        <input type="submit" value="Registrar">
+    </form>
+
+</body>
+<footer>
+    <small>Base de datos "donacion" realizada por José Rosales Sueiro</small>
+</footer>
+
+</html>
+
+
+<!--
+2. Input 
+Su etiqueta es <input>. Cuenta con diferentes tipos de entrada:
+
+Texto: se expresa como <input type=text> y es por defecto la entrada de una sola línea.
+ También puede tener otros atributos: 
+ <input maxlenght> que limita los campos a introducir; 
+ <input size> para indicar el espacio a disponer para cada campo y finalmente 
+ <input value> que indica el valor inicial de campo. 
+
+Caja de selección: se expresa como <input type=checkbox> y sirve para representar opciones como
+«Sí/No». 
+Botón: su etiqueta es <input type=radio>; representa un conjunto de varios elementos de este tipo
+ con el mismo nombre con un campo de selección múltiple. 
+
+Botón de envío: se expresa como <input type=submit> y representa la opción de lo que tiene que hacer el usuario, 
+que es, en este caso, enviar el formulario.
+
+3. Select
+Su etiqueta es <select>. Se utiliza para reducir una lista de valores, por ejemplo:
+
+Multiple: indica que puede haber más de una opción.
+Name: nombre de campo.
+Size: número de ítems visibles.
+
+4. Text area
+Su etiqueta es <textarea>. Representa el espacio donde puedes añadir todo el texto que requieras y puede tener los siguientes atributos:
+
+Cols: número de columnas visibles.
+Name: nombre del campo.
+Rows: número de líneas visibles.
+
+5. Fieldset
+Fieldset es un elemento que sirve para agrupar varios datos relacionados entre sí mismos. Su etiqueta es <fieldset>. 
+    Por ejemplo, si necesitas varios campos personales en un formulario, puedes agruparlos con este campo como en el siguiente ejemplo:
+
+<fieldset><label for="nombre">Nombre</label><input type="text" id="nombre"/><label for="apellido paterno">Apellido paterno</label>
+<input type="text" id="apellido paterno"/><label for="apellido materno">Apellido materno</label><input type="text" id="apellido materno"/>
+</fieldset>
+
+6. Legend
+Legend es un elemento que sirve para etiquetar o identificar una agrupación de campos. Su etiqueta es <legend>.
+
+<fieldset><leyend>Introduce tu nombre y apellidos</leyend><label for="nombre">Nombre</label><input type="text" id="nombre"/>
+<label for="apellido paterno">Apellido paterno</label><input type="text" id="apellido paterno"/>
+<label for="apellido materno">Apellido materno</label><input type="text" id="apellido materno"/></fieldset>
+-->
