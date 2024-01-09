@@ -22,13 +22,13 @@ try {
     //sus propiedades para luego poder reflejar el error y su información. Este modo se emplea en la mayoría de situaciones, 
     //ya que permite manejar los errores y a la vez esconder datos que podrían ayudar a alguien a atacar tu aplicación.
     $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    echo "Conexión correcta";
+    echo "Conexión correcta <br><br>";
 
     //Creamos la Base de Datos si no existe
-    $queryCreateDB = "CREATE DATABASE IF NOT EXISTS donacion";
+    $queryCreateDB = "CREATE DATABASE IF NOT EXISTS $dbname";
     $dbh->query($queryCreateDB);
 
-    $dbh->query("use donacion");
+    $dbh->query("use $dbname");
 
     //Creamos las Tablas "donantes", "historico" y "administradores" si no existen
     $queryCreateTable1 = "CREATE TABLE IF NOT EXISTS donantes(
@@ -50,7 +50,7 @@ try {
     $queryCreateTable2 = "CREATE TABLE IF NOT EXISTS historico(
         Donante INT, FOREIGN KEY(Donante) REFERENCES donantes(Id),
         Fecha_Donacion DATE, 
-        Proxima_Donacion DATE AS (DATE_ADD(Fecha_Donacion, INTERVAL 4 MONTH)
+        Proxima_Donacion DATE AS (DATE_ADD(Fecha_Donacion, INTERVAL 4 MONTH))
     )";
 
     $dbh->query($queryCreateTable2);
@@ -77,13 +77,13 @@ try {
 </head>
 
 <body>
-    <a class="btn btn-primary" href="registrarNuevoDonante.html" role="button" target="_blank">Registrar Nuevo Donante</a>
-    <a class="btn btn-primary" href="mostrarListaDonantes.php" role="button" target="_blank">Mostrar lista de mostrarListaDonantes</a>
-    <a class="btn btn-primary" href="registrarDonacion.php" role="button" target="_blank">Registrar Nueva Donación</a>
-    <a class="btn btn-primary" href="eliminarDonante.php" role="button" target="_blank">Eliminar Donante</a>
-    <a class="btn btn-primary" href="mostrarListaDonaciones.php" role="button" target="_blank">Mostrar lista de Donaciones</a>
-    <a class="btn btn-primary" href="buscarDonante.php" role="button" target="_blank">Buscar Donante</a>
-    <a class="btn btn-primary" href="registrarNuevoAdministrador.php" role="button" target="_blank">Registrar Nuevo Administrador</a>
+    <a class="btn btn-primary" href="registrarNuevoDonante.html" role="button" target="_blank">Registrar Nuevo Donante</a><br>
+    <a class="btn btn-primary" href="mostrarListaDonantes.php" role="button" target="_blank">Mostrar lista de mostrarListaDonantes</a><br>
+    <a class="btn btn-primary" href="registrarDonacion.php" role="button" target="_blank">Registrar Nueva Donación</a><br>
+    <a class="btn btn-primary" href="eliminarDonante.php" role="button" target="_blank">Eliminar Donante</a><br>
+    <a class="btn btn-primary" href="mostrarListaDonaciones.php" role="button" target="_blank">Mostrar lista de Donaciones</a><br>
+    <a class="btn btn-primary" href="buscarDonante.php" role="button" target="_blank">Buscar Donante</a><br>
+    <a class="btn btn-primary" href="registrarNuevoAdministrador.php" role="button" target="_blank">Registrar Nuevo Administrador</a><br>
 
     <footer>
         <p>
