@@ -3,7 +3,7 @@
 try {
     $servername = "localhost";
     $username = "root";
-    $password = "1234";
+    $password = "";
     $dbname = "donacion";
 
     $dsn = "mysql:host=$servername;dbname=$dbname";
