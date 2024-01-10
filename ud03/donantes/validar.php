@@ -24,16 +24,16 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validación del campo 'grupo sanguíneo'
     $gruposValidos = array("0+", "0-", "A+", "A-", "B+", "B-", "AB+", "AB-");
-    $grupoSanguineo = $_POST["grupo_sanguineo"];
-    if (empty($_POST["grupo_sanguineo"])) {
+    $grupoSanguineo = $_POST["grupo"];
+    if (empty($_POST["grupo"])) {
         $errores[] = "El campo 'grupo sanguíneo' es obligatorio";
     } else if (!in_array($grupoSanguineo, $gruposValidos)) {
         $errores[] = "El Grupo Sanguíneo no es un valor válido";
     }
 
     // Validación del campo 'codigo postal'
-    $codigoPostal = $_POST["codigo_postal"];
-    if (empty($_POST["codigo_postal"])) {
+    $codigoPostal = $_POST["cp"];
+    if (empty($_POST["cp"])) {
         $errores[] = "El campo 'codigo postal' es obligatorio";
     } else if (!preg_match("/^\d{5}$/", $codigoPostal)) {
         $errores[] = "El código postal debe tener 5 dígitos";
@@ -58,7 +58,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         try {
             $servername = "localhost";
             $username = "root";
-            $password = "1234";
+            $password = "";
             $dbname = "donacion";
 
             $dsn = "mysql:host=$servername;dbname=$dbname";
@@ -66,8 +66,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $dbh->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
 
             //Los VALUES son los "name" en el formulario de cada input.
-            $query = "INSERT INTO donantes(Nombre, Apellidos, Edad, Grupo_Sanguineo, Codigo_Postal, Telefono_Movil) 
-            VALUES(:nombre, :apellidos, :edad, :grupo_sanguineo, :cp, :telefono)";
+            $query = "INSERT INTO donantes(
+                Nombre, Apellidos, Edad, Grupo_Sanguineo, Codigo_Postal, Telefono_Movil)
+                VALUES(:nombre, :apellidos, :edad, :grupo_sanguineo, :cp, :telefono)";
 
             //Preparación de la declaración (Statement):
             //prepare($query): Prepara la consulta SQL para su ejecución. Retorna un objeto PDOStatement, que representa una sentencia preparada.
@@ -77,6 +78,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             //bindParam(':nombre', $nombre): Asocia el marcador de posición :nombre con el valor de la variable $nombre.
 
             $stmt->bindParam(':nombre', $nombre);
+            $stmt->bindParam(':apellidos', $apellidos);
             $stmt->bindParam(':edad', $edad);
             $stmt->bindParam(':grupo', $grupoSanguineo);
             $stmt->bindParam(':cp', $codigoPostal);
