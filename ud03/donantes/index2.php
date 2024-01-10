@@ -32,7 +32,7 @@ try {
 
     //Creamos las Tablas "donantes", "historico" y "administradores" si no existen
     $queryCreateTable1 = "CREATE TABLE IF NOT EXISTS donantes(
-        Id INT PRIMARY KEY, 
+        Id INT AUTO_INCREMENT PRIMARY KEY, 
         Nombre VARCHAR(20) NOT NULL, 
         Apellidos VARCHAR(50) NOT NULL, 
         Edad INT NOT NULL, 
