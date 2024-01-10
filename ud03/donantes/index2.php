@@ -36,11 +36,11 @@ try {
         Nombre VARCHAR(20) NOT NULL, 
         Apellidos VARCHAR(50) NOT NULL, 
         Edad INT NOT NULL, 
-        Grupo_Sanguineo VARCHAR(3) NOT NULL, 
+        grupoSanguineo VARCHAR(3) NOT NULL, 
         Codigo_Postal VARCHAR(5) NOT NULL,
         Telefono_Movil VARCHAR(9) NOT NULL, 
         CONSTRAINT edadRestriction CHECK (Edad > 18), 
-        CONSTRAINT grupoRestriction CHECK (Grupo_Sanguineo IN('O-','O+','A-','A+','B-','B+','AB-','AB+')),
+        CONSTRAINT grupoRestriction CHECK (grupoSanguineo IN('O-','O+','A-','A+','B-','B+','AB-','AB+')),
         CONSTRAINT cpRestriction CHECK (LENGTH(Codigo_Postal)=5), 
         CONSTRAINT tlfRestriction CHECK (LENGTH(Telefono_Movil)=9)
     )";

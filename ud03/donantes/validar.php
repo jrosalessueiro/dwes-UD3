@@ -4,6 +4,8 @@ $errores = array();
 // Verificar si se ha enviado el formulario
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
+    print_r($_POST);
+    
     // Validación del campo 'nombre'
     $nombre = $_POST["nombre"];
     if (empty($_POST["nombre"])) {
@@ -24,8 +26,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Validación del campo 'grupo sanguíneo'
     $gruposValidos = array("0+", "0-", "A+", "A-", "B+", "B-", "AB+", "AB-");
-    $grupoSanguineo = $_POST["grupo"];
-    if (empty($_POST["grupo"])) {
+    $grupoSanguineo = $_POST["grupoSanguineo"];
+    if (empty($_POST["grupoSanguineo"])) {
         $errores[] = "El campo 'grupo sanguíneo' es obligatorio";
     } else if (!in_array($grupoSanguineo, $gruposValidos)) {
         $errores[] = "El Grupo Sanguíneo no es un valor válido";
@@ -67,8 +69,8 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             //Los VALUES son los "name" en el formulario de cada input.
             $query = "INSERT INTO donantes(
-                Nombre, Apellidos, Edad, Grupo_Sanguineo, Codigo_Postal, Telefono_Movil)
-                VALUES(:nombre, :apellidos, :edad, :grupo_sanguineo, :cp, :telefono)";
+                Nombre, Apellidos, Edad, grupoSanguineo, Codigo_Postal, Telefono_Movil)
+                VALUES(:nombre, :apellidos, :edad, :grupoSanguineo, :cp, :telefono)";
 
             //Preparación de la declaración (Statement):
             //prepare($query): Prepara la consulta SQL para su ejecución. Retorna un objeto PDOStatement, que representa una sentencia preparada.
@@ -80,7 +82,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $stmt->bindParam(':nombre', $nombre);
             $stmt->bindParam(':apellidos', $apellidos);
             $stmt->bindParam(':edad', $edad);
-            $stmt->bindParam(':grupo', $grupoSanguineo);
+            $stmt->bindParam(':grupoSanguineo', $grupoSanguineo);
             $stmt->bindParam(':cp', $codigoPostal);
             $stmt->bindParam(':telefono', $telefono);
 
