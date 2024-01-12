@@ -55,24 +55,7 @@ cerrar_conexion($conexion);
         //  - editar.php?id=4
         //  - borrar.php?id=7
     ?>
-    <!-- <table>
-    <php if($resultados->num_rows > 0) { ?>
-    <php while($row = $resultados->fetch_assoc()){ ?>
-        <tr>
-        <td><php echo $row["id"];?></td>
-        echo "<td>".$row["nombre"]."</td>";
-        echo "<td>".$row["apellido"]."</td>";
-        echo "<td>".$row["edad"]."</td>";
-        echo "<td>".$row["provincia"]."</td>";
-        echo "<td> <a class='btn btn-primary' href=borrar.php?id=".$row['id'].">Borrar</a> </td>";
-        echo "<td> <a class='btn btn-primary' href=editar.php?id=".$row['id'].">Editar</a> </td>";
-        echo " </tr> ";
-  }
-} else {
-    echo "No hay resultados";
-}  
-    </table>
--->
+    
     <footer>
         <p>
             <a href='index.php'>Página de inicio</a>

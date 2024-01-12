@@ -51,15 +51,15 @@ try {
         </tr>
         <?php foreach ($donantes as $donante) : ?>
             <tr>
-                <td><?php echo $donante['id']; ?></td>
+                <td><?php echo $donante['Id']; ?></td>
                 <td><?php echo $donante['Nombre']; ?></td>
                 <td><?php echo $donante['Edad']; ?></td>
-                <td><?php echo $donante['Grupo_Sanguineo']; ?></td>
+                <td><?php echo $donante['grupoSanguineo']; ?></td>
                 <td><?php echo $donante['Codigo_Postal']; ?></td>
                 <td><?php echo $donante['Telefono_Movil']; ?></td>
                 <td>
                     <form action="eliminar.php" method="post">
-                        <input type="hidden" name="eliminar" value="<?php echo $donante['id']; ?>">
+                        <input type="hidden" name="eliminar" value="<?php echo $donante['Id']; ?>">
                         <input type="submit" value="Eliminar">
                     </form>
                 </td>

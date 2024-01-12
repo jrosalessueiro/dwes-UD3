@@ -1,7 +1,7 @@
 <?php
 
 function get_conexion(){
-    $conexion = new mysqli('localhost','root','1234');
+    $conexion = new mysqli('localhost','root','');
     // Comprobar la conexión
     $error = $conexion->connect_errno;
     if($error != null){
@@ -18,7 +18,7 @@ function seleccionar_bd_tienda($conexion){
 function crear_bd_tienda($conexion){
     $sql = "CREATE DATABASE IF NOT EXISTS tienda";
     if($conexion->query($sql)){
-        echo "Base de datos creada correctamente";
+        echo "Base de datos creada correctamente.<br>";
     }else{
         echo "Error a la hora de crear la base de datos".$conexion->error;
     }
@@ -34,7 +34,7 @@ function crear_tabla_usuario($conexion){
         )";
 
     if($conexion->query($sql)){
-        echo "Tabla creada correctamente";
+        echo "Tabla creada correctamente.<br>";
     }else{
         echo "Error a la hora de crear la tabla".$conexion->error;
     }
