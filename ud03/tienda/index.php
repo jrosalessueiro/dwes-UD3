@@ -1,6 +1,8 @@
 <?php
 session_start();
 
+//una vez iniciada la sesión, si está definida la vble $_SESSION suma una visita
+//en caso contrario la establece a valor 0
 if (!isset($_SESSION['counter'])) {
     $_SESSION['counter'] = 0;
 }else{
@@ -8,6 +10,8 @@ if (!isset($_SESSION['counter'])) {
 }
 echo "El usuario ha entrado ".$_SESSION['counter']." veces.<br>";
 ?>
+
+
 <!doctype html>
 <html lang="en">
 
