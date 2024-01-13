@@ -11,8 +11,6 @@ if (!isset($_SESSION['counter'])) {
 echo "El usuario ha entrado ".$_SESSION['counter']." veces.<br>";
 ?>
 
-
-
 <!doctype html>
 <html lang="en">
 
@@ -30,6 +28,8 @@ echo "El usuario ha entrado ".$_SESSION['counter']." veces.<br>";
     crear_bd_tienda($conexion);
     seleccionar_bd_tienda($conexion);
     crear_tabla_usuario($conexion);
+    crear_tabla_productos($conexion);
+
 
     ?>
     <h1>Tienda IES San Clemente</h1>

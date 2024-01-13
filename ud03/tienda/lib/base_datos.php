@@ -42,6 +42,24 @@ function crear_tabla_usuario($conexion){
     
 }
 
+function crear_tabla_productos($conexion){
+    $sql = "CREATE TABLE IF NOT EXISTS productos (
+        id INT AUTO_INCREMENT PRIMARY KEY,
+        nombre VARCHAR(50),
+        descripcion VARCHAR(100),
+        precio FLOAT,
+        unidades FLOAT,
+        foto BLOB
+        )";
+
+    if($conexion->query($sql)){
+        echo "Tabla creada correctamente.<br>";
+    }else{
+        echo "Error a la hora de crear la tabla".$conexion->error;
+    }
+    
+}
+
 function insertar_usuario($conexion,$nombre,$apellidos,$edad,$provincia){
            
         $sql = "INSERT INTO usuarios (nombre, apellido, edad, provincia)
