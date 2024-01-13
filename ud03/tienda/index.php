@@ -12,6 +12,7 @@ echo "El usuario ha entrado ".$_SESSION['counter']." veces.<br>";
 ?>
 
 
+
 <!doctype html>
 <html lang="en">
 
@@ -47,3 +48,4 @@ echo "El usuario ha entrado ".$_SESSION['counter']." veces.<br>";
 </body>
 
 </html>
+

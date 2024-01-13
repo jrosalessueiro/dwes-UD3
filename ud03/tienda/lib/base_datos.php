@@ -1,4 +1,5 @@
 <?php
+session_start();
 
 function get_conexion(){
     $conexion = new mysqli('localhost','root','');
