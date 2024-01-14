@@ -113,3 +113,4 @@ function actualizar_usuario($conexion,$id,$nombre,$apellidos,$edad,$provincia){
         echo "Error a la hora de actualizar un registro".$conexion->error;
     }
 }
+

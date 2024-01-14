@@ -28,23 +28,23 @@ session_start();
 
         insertar_producto($conexion, $nombre, $descripcion, $precio, $unidades, $foto);
     }
-
+    comprobaciones($foto);
     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
     </script>
 
     <p>Formulario de alta Producto</p>
-    <form action="alta_productos.php" method="post">
+    <form action="alta_productos.php" method="post" enctype="multipart/form-data">
         <label for="pname">Nombre:</label>
-            <input type="text" id="pname" name="pname"><br><br>
+        <input type="text" id="pname" name="pname"><br><br>
         <label for="pdescription">Descripción:</label>
-            <input type="text" id="pdescription" name="pdescription"><br><br>
+        <input type="text" id="pdescription" name="pdescription"><br><br>
         <label for="pprice">Precio:</label>
-            <input type="text" id="pprice" name="pprice"><br><br>
+        <input type="text" id="pprice" name="pprice"><br><br>
         <label for="punits">Unidades:</label>
-            <input type="text" id="punits" name="punits"><br><br>
+        <input type="text" id="punits" name="punits"><br><br>
         <label for="pphoto">Foto:</label>
-            <input type="text" id="pphoto" name="pphoto"><br><br>
+        <input type="file" id="pphoto" name="pphoto"><br><br>
 
         <input type="submit" value="Guardar">
     </form>
