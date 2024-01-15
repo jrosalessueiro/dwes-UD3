@@ -26,9 +26,13 @@ session_start();
         $conexion = get_conexion();
         seleccionar_bd_tienda($conexion);
 
-        insertar_producto($conexion, $nombre, $descripcion, $precio, $unidades, $foto);
+        $foto_ruta = comprobaciones($_FILES["pphoto"]);
+
+        insertar_producto($conexion, $nombre, $descripcion, $precio, $unidades, $foto_ruta);
+
+        echo "Producto dado de alta correctamente.";
     }
-    comprobaciones($foto);
+
     ?>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
     </script>
