@@ -75,7 +75,7 @@ function insertar_usuario($conexion,$nombre,$apellidos,$edad,$provincia){
 function insertar_producto($conexion, $nombre, $descripcion, $precio, $unidades, $foto){
            
     $sql = "INSERT INTO productos (nombre,descripcion,precio,unidades,foto)
-    VALUES ('$nombre', '$descripcion', '$precio', '$unidades','$foto');";
+    VALUES ('$nombre', '$descripcion', '$precio', '$unidades','" . $foto . "');";
 
     if($conexion->query($sql)){
         echo "Se ha creado un nuevo registro correctamente";

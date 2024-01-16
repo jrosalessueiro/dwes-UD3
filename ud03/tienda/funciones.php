@@ -1,5 +1,5 @@
 <?php
-function comprobaciones($foto)
+function comprobaciones(array $foto): string
 {
     //Las imagenes se guardaran en la carpeta uploads con los permisos adecuados
     $target_dir = "uploads/";
@@ -10,12 +10,13 @@ function comprobaciones($foto)
 
     //Vemos si existe e fichero
     if (!file_exists($target_file)) {
-        if (compruebaExtension($tipo_fichero) == true && compruebaTamanho($_FILES["pphoto"]) == true) {
-            move_uploaded_file($foto["tmp_name"], $target_file);
-            return $target_file;
-        } else {
-            echo "El fichero ya existe.";
+        if (compruebaExtension($tipo_fichero) && compruebaTamanho($foto)) {
+            //move_uploaded_file($foto["tmp_name"], $target_file);
+            $imgData = file_get_contents($foto["tmp_name"]);
+            return $imgData;
         }
+    } else {
+        echo "El fichero YA existe.";
     }
 }
 
@@ -29,12 +30,13 @@ function compruebaExtension($tipo_fichero)
     }
 }
 
-function compruebaTamanho($foto)
+function compruebaTamanho(array $foto)
 {
-    //Comprobamos si el tamaño es menor de 50MB
+    // Comprobamos si el tamaño es mayor de 50MB.
     if ($foto["size"] > 50000) {
-        return true;
-    } else {
         echo "El fichero es demasiado grande. Máximo 50MB.";
+        return false;
     }
+    
+    return true;
 }

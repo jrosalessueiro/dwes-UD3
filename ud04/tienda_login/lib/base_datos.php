@@ -117,9 +117,19 @@ function usuariobd($conexion, $nombre)
 {
     $sql = "SELECT nombre FROM usuarios WHERE nombre = $nombre";
     if ($conexion->query($sql)) {
-        return true;
-    }else{
+        return $sql;
+    } else {
         echo "El usuario no está registrado.";
+    }
+}
+
+function passbd($conexion, $nombre)
+{
+    $sql = "SELECT password FROM usuarios WHERE nombre = $nombre";
+    if ($conexion->query($sql)) {
+        return $sql;
+    } else {
+        echo "La contraseña no es correcta.";
     }
 }
 
