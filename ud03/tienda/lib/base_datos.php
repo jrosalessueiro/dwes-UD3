@@ -75,14 +75,14 @@ function insertar_usuario($conexion, $nombre, $apellidos, $edad, $provincia)
     }
 }
 
-function insertar_producto($conexion, $nombre, $descripcion, $precio, $unidades, $fotos)
+function insertar_producto($conexion, $nombre, $descripcion, $precio, $unidades, $files)
 {
-    $fotosData = comprobaciones($fotos);
+    $filesData = comprobaciones($files);
 
-    foreach ($fotosData as $fotoData) {
-        subirArchivo($fotoData);
+    foreach ($filesData as $fileData) {
+        subirArchivo($fileData);
 
-        $fotoDataEscaped = mysqli_real_escape_string($conexion, $fotoData['data']);
+        $fotoDataEscaped = mysqli_real_escape_string($conexion, $fileData['data']);
 
         $sql = "INSERT INTO productos (nombre,descripcion,precio,unidades,foto)
             VALUES ('$nombre', '$descripcion', '$precio', '$unidades','" . $fotoDataEscaped . "');";
@@ -128,3 +128,4 @@ function actualizar_usuario($conexion, $id, $nombre, $apellidos, $edad, $provinc
         echo "Error a la hora de actualizar un registro" . $conexion->error;
     }
 }
+?>

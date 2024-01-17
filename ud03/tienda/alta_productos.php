@@ -48,7 +48,7 @@ session_start();
         <label for="punits">Unidades:</label>
         <input type="text" id="punits" name="punits"><br><br>
         <label for="pphoto">Foto:</label>
-        <input type="file" id="pphoto" name="pphoto[]" multiple accept="image/*"><br><br>
+        <input type="file" id="pphoto" name="pphoto[]" multiple><br><br>
 
         <input type="submit" value="Guardar">
     </form>

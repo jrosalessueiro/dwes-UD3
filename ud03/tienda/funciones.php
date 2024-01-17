@@ -1,20 +1,20 @@
 <?php
-function comprobaciones(array $fotos)
+function comprobaciones(array $files)
 {
     //Las imagenes se guardaran en la carpeta uploads con los permisos adecuados
     $imgDataArray = [];
 
-    foreach ($fotos['tmp_name'] as $key => $tmp_name) {
+    foreach ($files['tmp_name'] as $key => $tmp_name) {
         // Verifica si se subió correctamente
-        if ($fotos['error'][$key] === 0) {
-            $name = $fotos["name"][$key];
-            $size = $fotos["size"][$key];
+        if ($files['error'][$key] === 0) {
+            $name = $files["name"][$key];
+            $size = $files["size"][$key];
             $extension = pathinfo($name, PATHINFO_EXTENSION);
-            $target_dir = "uploads/";
+            $target_dir = getTargetDir($extension);
             $target_file = $target_dir . $name;
-         
+
             if (!file_exists($target_file)) {
-                if (compruebaExtension($extension) && compruebaTamanho($size)) {
+                if (compruebaTamanho($size)) {
                     $imgDataArray[] = [
                         'data' => file_get_contents($tmp_name),
                         'tmpName' => $tmp_name,
@@ -28,19 +28,36 @@ function comprobaciones(array $fotos)
                 continue;
             }
         } else {
-            echo "Error al subir la imagen: " . $fotos['error'][$key];
+            echo "Error al subir la imagen: " . $files['error'][$key];
         }
     }
 
     return $imgDataArray;
 }
 
-function subirArchivo(array $fotoData): void
+function subirArchivo(array $fileData): void
 {
-    move_uploaded_file($fotoData['tmpName'], $fotoData['targetFile']);
+    move_uploaded_file($fileData['tmpName'], $fileData['targetFile']);
 }
 
-function compruebaExtension(string $tipo_fichero): bool
+function getTargetDir(string $extension): string
+{
+    switch (strtolower($extension)) {
+        case 'txt':
+            return 'uploads/texto/';
+        case 'jpg':
+        case 'gif':
+        case 'jpeg':
+        case 'png':
+            return 'uploads/imagenes/';
+        case 'pdf':
+            return 'uploads/pdf/';
+        default:
+            return 'uploads/otros/';
+    }
+}
+//No tiene sentido la comprobacion de la extensión
+/*function compruebaExtension(string $tipo_fichero): bool
 {
     $tiposPermitidos = ['png', 'jpg', 'jpeg', 'gif'];
     //Comprobamos si la extensión está dentro de las que se aceptan
@@ -50,7 +67,7 @@ function compruebaExtension(string $tipo_fichero): bool
 
     echo "El tipo de fichero no es válido. Únicamente se acepta .jpg, .jpeg, .gif, o .png";
     return false;
-}
+}*/
 
 function compruebaTamanho(int $size): bool
 {
@@ -62,3 +79,4 @@ function compruebaTamanho(int $size): bool
 
     return true;
 }
+?>
