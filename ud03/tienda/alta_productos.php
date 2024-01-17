@@ -16,23 +16,19 @@ session_start();
     <h1>Alta de producto </h1>
     <?php
     if (isset($_POST["pname"], $_POST["pdescription"], $_POST["pprice"], $_POST["punits"], $_FILES["pphoto"])) {
-        echo "ENTRO";
         $nombre = $_POST['pname'];
         $descripcion = $_POST['pdescription'];
         $precio = $_POST['pprice'];
         $unidades = $_POST['punits'];
-        $foto = $_FILES['pphoto'];
+        $fotos = $_FILES['pphoto'];
 
         include("lib/base_datos.php");
         $conexion = get_conexion();
         seleccionar_bd_tienda($conexion);
 
         include("funciones.php");
-        $fotoData = comprobaciones($foto);
 
-        $fotoDataEscaped = mysqli_real_escape_string($conexion, $fotoData);
-
-        insertar_producto($conexion, $nombre, $descripcion, $precio, $unidades, $fotoDataEscaped);
+        insertar_producto($conexion, $nombre, $descripcion, $precio, $unidades, $fotos);
 
         echo "Producto dado de alta correctamente.";
     }
@@ -52,7 +48,7 @@ session_start();
         <label for="punits">Unidades:</label>
         <input type="text" id="punits" name="punits"><br><br>
         <label for="pphoto">Foto:</label>
-        <input type="file" id="pphoto" name="pphoto"><br><br>
+        <input type="file" id="pphoto" name="pphoto[]" multiple accept="image/*"><br><br>
 
         <input type="submit" value="Guardar">
     </form>
