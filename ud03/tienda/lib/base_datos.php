@@ -32,9 +32,11 @@ function crear_tabla_usuario($conexion)
     $sql = "CREATE TABLE IF NOT EXISTS usuarios (
         id INT AUTO_INCREMENT PRIMARY KEY,
         nombre VARCHAR(50),
-        apellido VARCHAR(100),
+        apellidos VARCHAR(100),
         edad INT,
-        provincia VARCHAR(50)
+        provincia VARCHAR(50),
+        email VARCHAR(50),
+        contrasenha VARCHAR(50)
         )";
 
     if ($conexion->query($sql)) {
@@ -62,11 +64,11 @@ function crear_tabla_productos($conexion)
     }
 }
 
-function insertar_usuario($conexion, $nombre, $apellidos, $edad, $provincia)
+function insertar_usuario($conexion, $nombre, $apellidos, $edad, $provincia, $email, $contrasenha)
 {
 
-    $sql = "INSERT INTO usuarios (nombre, apellido, edad, provincia)
-        VALUES ('$nombre', '$apellidos', '$edad', '$provincia');";
+    $sql = "INSERT INTO usuarios (nombre, apellidos, edad, provincia, email, contrasenha)
+        VALUES ('$nombre', '$apellidos', '$edad', '$provincia', '$email', '$contrasenha');";
 
     if ($conexion->query($sql)) {
         echo "Se ha creado un nuevo registro correctamente";
@@ -119,13 +121,50 @@ function obtener_usuario($conexion, $id)
     return $resultado->fetch_assoc();
 }
 
-function actualizar_usuario($conexion, $id, $nombre, $apellidos, $edad, $provincia)
+function actualizar_usuario($conexion, $id, $nombre, $apellidos, $edad, $provincia, $email, $contrasenha)
 {
-    $sql = "UPDATE usuarios SET nombre='$nombre', apellido='$apellidos', edad='$edad', provincia='$provincia' WHERE id=$id";
+    $sql = "UPDATE usuarios SET nombre='$nombre', apellido='$apellidos', edad='$edad', provincia='$provincia', email='$email', contrasenha='$contrasenha'WHERE id=$id";
     if ($conexion->query($sql)) {
         echo "Se ha actualizado un registro correctamente";
     } else {
         echo "Error a la hora de actualizar un registro" . $conexion->error;
     }
 }
-?>
+
+function userbd($conexion, $pass)
+{
+    $sql = "SELECT email FROM usuarios WHERE contrasenha = '$pass'";
+    $result = $conexion->query($sql);
+
+    if ($result) {
+        $fila = $result->fetch_assoc();
+
+        if ($fila) {
+            return $fila['email'];
+        } else {
+            return null;
+        }
+    } else {
+        echo "ERROR. " . $conexion->error;
+        return null;
+    }
+}
+
+function passbd($conexion, $email)
+{
+    $sql = "SELECT contrasenha FROM usuarios WHERE email = '$email'";
+    $result = $conexion->query($sql);
+
+    if ($result) {
+        $fila = $result->fetch_assoc();
+
+        if ($fila) {
+            return $fila['contrasenha'];
+        } else {
+            return null;
+        }
+    } else {
+        echo "ERROR. " . $conexion->error;
+        return null;
+    }
+}

@@ -1,34 +1,37 @@
 <?php
 session_start();
 
-function comprobar_usuario($nombre, $pass)
+function comprobar_usuario($email, $pass)
 {
     include("lib/base_datos.php");
     $conexion = get_conexion();
     seleccionar_bd_tienda($conexion);
 
-    $user = usuariobd($conexion, $nombre);
-    $contrasenha = passbd($conexion, $pass);
+    $user = userbd($conexion, $email);
+    $passwd = passbd($conexion, $pass);
 
-    if ($nombre == $user && $pass == $contrasenha) {
-        return true;
+    if ($email == $user && $pass == $passwd) {
+        echo "Se ha identificado correctamente.";
+        header('Location:index.php');        
     } else {
-        echo "La contraseña no coincide con la del usuario $nombre.";
+        echo "ERROR. La contraseña no coincide con la del usuario" .$user;
     }
 }
 
 //Comprobar si se reciben los datos
-if ($_SERVER["REQUEST METHOD"] == "POST") {
-    $user = $_POST["usuario"];
-    $pass = $_POST["password"];
-    $user = comprobar_usuario($nombre, $pass);
-    if (!$user) {
+if (isset($_POST["email"], $_POST["contrasenha"])) {
+    $user = $_POST["email"];
+    $passwd = $_POST["contrasenha"];
+
+    comprobar_usuario($user, $passwd);
+    /*if (!$user) {
         $error = true;
     } else {
         $_SESSION["usuario"] = $user;
+        echo "Entró usted en la sesión de $user";
         //Redirigimos a index.php
         header('Location:index.php');
-    }
+    }*/
 }
 ?>
 
@@ -46,10 +49,19 @@ if ($_SERVER["REQUEST METHOD"] == "POST") {
 <body>
     <h2>Login de usuarios registrados:</h2><br>
     <form action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>" method="post">
-        Usuario: <input type="text" id="usuario" name="usuario"><br><br>
-        Contraseña: <input type="password" id="password" name="password"><br><br>
+        <label for="lemail">email:</label>
+        <input type="email" id="email" name="email"><br><br>
+        <label for="lcontrasenha">Contraseña:</label>
+        <input type="password" id="contrasenha" name="contrasenha"><br><br>
         <input type="submit">
     </form>
+
+    <footer>
+        <p>
+            <a href='index.php'>Página de inicio</a>
+        </p>
+    </footer>
+
 </body>
 
 </html>

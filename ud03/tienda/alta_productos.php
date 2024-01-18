@@ -47,7 +47,7 @@ session_start();
         <input type="text" id="pprice" name="pprice"><br><br>
         <label for="punits">Unidades:</label>
         <input type="text" id="punits" name="punits"><br><br>
-        <label for="pphoto">Foto:</label>
+        <label for="pphoto">Archivos:</label>
         <input type="file" id="pphoto" name="pphoto[]" multiple><br><br>
 
         <input type="submit" value="Guardar">

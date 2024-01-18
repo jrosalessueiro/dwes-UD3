@@ -39,7 +39,7 @@ echo "El usuario ha entrado ".$_SESSION['counter']." veces.<br>";
         <a class="btn btn-primary" href="dar_de_alta.php" role="button"> Alta usuarios</a>
         <a class="btn btn-primary" href="listar.php" role="button"> Listar usuarios</a>
         <a class="btn btn-primary" href="alta_productos.php" role="button"> Alta productos</a>
-
+        <a class="btn btn-primary" href="login.php" role="button"> Login</a>
     </p>
     <footer>
         <p>

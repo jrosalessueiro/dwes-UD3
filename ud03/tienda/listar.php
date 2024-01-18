@@ -25,7 +25,7 @@ session_start();
     $conexion = get_conexion();
     seleccionar_bd_tienda($conexion);
     
-    $sql = "SELECT id, nombre, apellido, edad, provincia FROM usuarios";
+    $sql = "SELECT id, nombre, apellidos, edad, provincia, email, contrasenha FROM usuarios";
     // La siguiente línea de código ejecuta la consulta y coloca los datos resultantes en una variable llamada $resultado.
     $resultados = $conexion->query($sql);
 
@@ -38,9 +38,11 @@ session_start();
         echo " <tr> ";
         echo "<td>".$row["id"]."</td>";
         echo "<td>".$row["nombre"]."</td>";
-        echo "<td>".$row["apellido"]."</td>";
+        echo "<td>".$row["apellidos"]."</td>";
         echo "<td>".$row["edad"]."</td>";
         echo "<td>".$row["provincia"]."</td>";
+        echo "<td>".$row["email"]."</td>";
+        echo "<td>".$row["contrasenha"]."</td>";
         echo "<td> <a class='btn btn-primary' href=borrar.php?id=".$row['id'].">Borrar</a> </td>";
         echo "<td> <a class='btn btn-primary' href=editar.php?id=".$row['id'].">Editar</a> </td>";
         echo " </tr> ";
@@ -50,14 +52,6 @@ session_start();
     echo "No hay resultados";
 }
 cerrar_conexion($conexion);
-
-        //Obter conexión
-        //Seleccionar bd
-        //Consulta obtención dos usuarios (array)
-        //Crear lista de usuarios
-        //  - cada usuario mostra dous enlaces (editar e borrar)
-        //  - editar.php?id=4
-        //  - borrar.php?id=7
     ?>
     
     <footer>
