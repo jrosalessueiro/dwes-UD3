@@ -68,8 +68,8 @@ function insertar_usuario($conexion, $nombre, $apellidos, $edad, $provincia, $em
     $query = 'INSERT INTO usuarios (nombre, apellidos, edad, provincia, email, contrasenha) VALUES ??????';
     $stmt = $conexion->prepare($query);
     $stmt->bind_param('ssisss', $nombre, $apellidos, $edad, $provincia, $email, $contrasenha);
-
     $stmt->execute();
+
     if ($conexion->query($query)) {
         echo 'Se ha creado un nuevo registro correctamente';
     } else {
@@ -90,9 +90,9 @@ function insertar_producto($conexion, $nombre, $descripcion, $precio, $unidades,
             VALUES ('$nombre', '$descripcion', '$precio', '$unidades','" . $fotoDataEscaped . "');";
 
         if ($conexion->query($sql)) {
-            echo "Se ha creado un nuevo registro correctamente";
+            echo "Se ha creado un nuevo registro correctamente <br>";
         } else {
-            echo "Error a la hora de crear nuevo registro" . $conexion->error;
+            echo "Error a la hora de crear nuevo registro <br>" . $conexion->error;
         }
     }
 }
@@ -104,18 +104,17 @@ function cerrar_conexion($conexion)
 
 function borrar_usuario($conexion, $busqueda)
 {
-
-    $sql = "DELETE FROM usuarios WHERE id=$busqueda";
+    $sql = 'DELETE FROM usuarios WHERE id=' . $busqueda;
     if ($conexion->query($sql)) {
-        echo "Se ha borrado un registro correctamente";
+        echo 'Se ha borrado un registro correctamente';
     } else {
-        echo "Error a la hora de borrar un registro" . $conexion->error;
+        echo 'Error a la hora de borrar un registro' . $conexion->error;
     }
 }
 
 function obtener_usuario($conexion, $id)
 {
-    $sql = "SELECT * FROM usuarios WHERE id = $id";
+    $sql = 'SELECT * FROM usuarios WHERE id =' . $id;
 
     $resultado = $conexion->query($sql);
     return $resultado->fetch_assoc();
@@ -123,11 +122,15 @@ function obtener_usuario($conexion, $id)
 
 function actualizar_usuario($conexion, $id, $nombre, $apellidos, $edad, $provincia, $email, $contrasenha)
 {
-    $sql = ("UPDATE usuarios SET nombre='$nombre', apellido='$apellidos', edad='$edad', provincia='$provincia', email='$email', contrasenha='$contrasenha'WHERE id=$id");
-    if ($conexion->query($sql)) {
-        echo "Se ha actualizado un registro correctamente";
+    $query = 'UPDATE usuarios SET nombre=?, apellidos=?, edad=?, provincia=?, email=?, contrasenha=? WHERE id=?';
+    $stmt = $conexion->prepare($query);
+    $stmt->bind_param('ssisssi', $nombre, $apellidos, $edad, $provincia, $email, $contrasenha, $id);
+    $stmt->execute();
+
+    if ($stmt->affected_rows > 0) {
+        echo "Se ha actualizado un registro correctamente <br>";
     } else {
-        echo "Error a la hora de actualizar un registro" . $conexion->error;
+        echo "Error a la hora de actualizar un registro" . $stmt->error;
     }
 }
 

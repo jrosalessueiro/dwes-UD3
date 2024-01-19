@@ -1,21 +1,7 @@
 <?php
-session_start();
-
-if(!isset($_SESSION['usuario'])){	
-    header("Location: login.php");
-}
-
-//una vez iniciada la sesión, si está definida la vble $_SESSION suma una visita
-//en caso contrario la establece a valor 0
-if (!isset($_SESSION['counter'])) {
-    $_SESSION['counter'] = 0;
-}else{
-    $_SESSION['counter']++;
-}
-echo "El usuario ha entrado ".$_SESSION['counter']." veces.<br>";
-
+include('usuario.php');
+usuario();
 ?>
-
 <!doctype html>
 <html lang="en">
 
@@ -28,7 +14,7 @@ echo "El usuario ha entrado ".$_SESSION['counter']." veces.<br>";
 
 <body>
     <?php
-    include("lib/base_datos.php");
+    include('lib/base_datos.php');
     $conexion = get_conexion();
     crear_bd_tienda($conexion);
     seleccionar_bd_tienda($conexion);
@@ -41,10 +27,10 @@ echo "El usuario ha entrado ".$_SESSION['counter']." veces.<br>";
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous">
     </script>
     <p>
-        <a class="btn btn-primary" href="dar_de_alta.php" role="button"> Alta usuarios</a>
-        <a class="btn btn-primary" href="listar.php" role="button"> Listar usuarios</a>
-        <a class="btn btn-primary" href="alta_productos.php" role="button"> Alta productos</a>
-        <a class="btn btn-primary" href="logout.php" role="button"> LogOut</a>
+        <a class='btn btn-primary' href='dar_de_alta.php' role='button'> Alta usuarios</a>
+        <a class='btn btn-primary' href='listar.php' role='button'> Listar usuarios</a>
+        <a class='btn btn-primary' href='alta_productos.php' role='button'> Alta productos</a>
+        <a class='btn btn-primary' href='logout.php' role='button'> LogOut</a>
     </p>
     <footer>
         <p>

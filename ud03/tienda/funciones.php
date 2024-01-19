@@ -44,6 +44,7 @@ function getTargetDir(string $extension): string
 {
     switch (strtolower($extension)) {
         case 'txt':
+        case 'odt':
             return 'uploads/texto/';
         case 'jpg':
         case 'gif':
@@ -56,18 +57,6 @@ function getTargetDir(string $extension): string
             return 'uploads/otros/';
     }
 }
-//No tiene sentido la comprobacion de la extensión
-/*function compruebaExtension(string $tipo_fichero): bool
-{
-    $tiposPermitidos = ['png', 'jpg', 'jpeg', 'gif'];
-    //Comprobamos si la extensión está dentro de las que se aceptan
-    if (in_array(strtolower($tipo_fichero), $tiposPermitidos)) {
-        return true;
-    }
-
-    echo "El tipo de fichero no es válido. Únicamente se acepta .jpg, .jpeg, .gif, o .png";
-    return false;
-}*/
 
 function compruebaTamanho(int $size): bool
 {
@@ -79,4 +68,3 @@ function compruebaTamanho(int $size): bool
 
     return true;
 }
-?>
