@@ -1,6 +1,10 @@
 <?php
 session_start();
 
+if(!isset($_SESSION['usuario'])){	
+    header("Location: login.php");
+}
+
 //una vez iniciada la sesión, si está definida la vble $_SESSION suma una visita
 //en caso contrario la establece a valor 0
 if (!isset($_SESSION['counter'])) {
@@ -9,6 +13,7 @@ if (!isset($_SESSION['counter'])) {
     $_SESSION['counter']++;
 }
 echo "El usuario ha entrado ".$_SESSION['counter']." veces.<br>";
+
 ?>
 
 <!doctype html>
@@ -39,7 +44,7 @@ echo "El usuario ha entrado ".$_SESSION['counter']." veces.<br>";
         <a class="btn btn-primary" href="dar_de_alta.php" role="button"> Alta usuarios</a>
         <a class="btn btn-primary" href="listar.php" role="button"> Listar usuarios</a>
         <a class="btn btn-primary" href="alta_productos.php" role="button"> Alta productos</a>
-        <a class="btn btn-primary" href="login.php" role="button"> Login</a>
+        <a class="btn btn-primary" href="logout.php" role="button"> LogOut</a>
     </p>
     <footer>
         <p>

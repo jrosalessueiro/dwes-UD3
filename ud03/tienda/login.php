@@ -7,11 +7,9 @@ function comprobar_usuario($email, $pass)
     $conexion = get_conexion();
     seleccionar_bd_tienda($conexion);
 
-    $user = userbd($conexion, $email);
-    $passwd = passbd($conexion, $pass);
-
-    if ($email == $user && $pass == $passwd) {
-        echo "Se ha identificado correctamente.";
+    $user = getUsuario($conexion, $email, $pass);
+    if ($user !== null) {
+        $_SESSION['usuario'] = $user;
         header('Location:index.php');        
     } else {
         echo "ERROR. La contraseña no coincide con la del usuario" .$user;
