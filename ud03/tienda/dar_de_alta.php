@@ -1,10 +1,10 @@
 <?php
-include('usuario.php');
-usuario();
+//include('funciones.php');
+//usuario();
 ?>
 
 <!doctype html>
-<html lang="en">
+<html lang='en'>
 
 <head>
     <meta charset='utf-8'>

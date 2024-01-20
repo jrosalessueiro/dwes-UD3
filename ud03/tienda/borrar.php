@@ -1,5 +1,5 @@
 <?php
-include('usuario.php');
+include('funciones.php');
 usuario();
 ?>
 

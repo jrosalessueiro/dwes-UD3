@@ -1,14 +1,12 @@
 <?php
-include('usuario.php');
-usuario();
 
 function comprobar_usuario($email, $pass)
 {
     include('lib/base_datos.php');
     $conexion = get_conexion();
     seleccionar_bd_tienda($conexion);
-
     $user = getUsuario($conexion, $email, $pass);
+    
     if ($user !== null) {
         $_SESSION['usuario'] = $user;
         header('Location:index.php');        

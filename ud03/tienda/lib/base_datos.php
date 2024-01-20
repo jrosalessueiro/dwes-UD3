@@ -22,7 +22,7 @@ function crear_bd_tienda($conexion)
     if ($conexion->query($sql)) {
         echo 'Base de datos creada correctamente.<br>';
     } else {
-        echo 'Error a la hora de crear la base de datos' . $conexion->error;
+        echo 'Error a la hora de crear la base de datos.<br>' . $conexion->error;
     }
 }
 
@@ -35,7 +35,7 @@ function crear_tabla_usuario($conexion)
         edad INT,
         provincia VARCHAR(50),
         email VARCHAR(50),
-        contrasenha VARCHAR(50)
+        contrasenha VARCHAR(255)
         )';
 
     if ($conexion->query($sql)) {
@@ -65,15 +65,16 @@ function crear_tabla_productos($conexion)
 
 function insertar_usuario($conexion, $nombre, $apellidos, $edad, $provincia, $email, $contrasenha)
 {
-    $query = 'INSERT INTO usuarios (nombre, apellidos, edad, provincia, email, contrasenha) VALUES ??????';
+    $query = 'INSERT INTO usuarios (nombre, apellidos, edad, provincia, email, contrasenha) VALUES (?,?,?,?,?,?)';
     $stmt = $conexion->prepare($query);
-    $stmt->bind_param('ssisss', $nombre, $apellidos, $edad, $provincia, $email, $contrasenha);
+    $contrasenhaHash = md5($contrasenha);
+    $stmt->bind_param('ssisss', $nombre, $apellidos, $edad, $provincia, $email, $contrasenhaHash);
     $stmt->execute();
 
-    if ($conexion->query($query)) {
+    if ($stmt->affected_rows > 0) {
         echo 'Se ha creado un nuevo registro correctamente';
     } else {
-        echo 'Error a la hora de crear nuevo registro' . $conexion->error;
+        echo 'Error a la hora de crear nuevo registro' . $stmt->error;
     }
 }
 
@@ -122,9 +123,10 @@ function obtener_usuario($conexion, $id)
 
 function actualizar_usuario($conexion, $id, $nombre, $apellidos, $edad, $provincia, $email, $contrasenha)
 {
-    $query = 'UPDATE usuarios SET nombre=?, apellidos=?, edad=?, provincia=?, email=?, contrasenha=? WHERE id=?';
+    $query = 'UPDATE usuarios SET nombre = ?, apellidos = ?, edad = ?, provincia = ?, email = ?, contrasenha = ? WHERE id = ?';
     $stmt = $conexion->prepare($query);
-    $stmt->bind_param('ssisssi', $nombre, $apellidos, $edad, $provincia, $email, $contrasenha, $id);
+    $contrasenhaHash = md5($contrasenha);
+    $stmt->bind_param('ssisssi', $nombre, $apellidos, $edad, $provincia, $email, $contrasenhaHash, $id);
     $stmt->execute();
 
     if ($stmt->affected_rows > 0) {
@@ -138,14 +140,18 @@ function getUsuario($conexion, string $email, string $pass): ?array
 {
     $query = 'SELECT * FROM usuarios WHERE email = ? AND contrasenha = ?';
     $stmt = $conexion->prepare($query);
-    $stmt->bind_param('ss', $email, $pass);
 
+    $passHash = md5($pass);
+    $stmt->bind_param('ss', $email, $passHash);
     $stmt->execute();
+
     $result = $stmt->get_result();
-    if (!$result) {
+
+    if ($result->num_rows === 1) {
+        $usuario = $result->fetch_assoc();
+        return $usuario;
+    } else {
         echo "ERROR. " . $conexion->error;
         return null;
     }
-    $usuario = $result->fetch_assoc();
-    return $usuario;
 }
