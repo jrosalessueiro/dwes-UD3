@@ -45,6 +45,7 @@ function getTargetDir(string $extension): string
     switch (strtolower($extension)) {
         case 'txt':
         case 'odt':
+        case 'docx':
             return 'uploads/texto/';
         case 'jpg':
         case 'gif':
@@ -71,7 +72,9 @@ function compruebaTamanho(int $size): bool
 
 function usuario()
 {
-    session_start();
+    if (session_status() !== PHP_SESSION_ACTIVE) {
+        session_start();
+    }
 
     if (!isset($_SESSION['counter'])) {
         $_SESSION['counter'] = 1;
@@ -79,11 +82,8 @@ function usuario()
         $_SESSION['counter']++;
     }
     echo 'El usuario ha entrado ' . $_SESSION['counter'] . ' veces.<br>';
-}
 
-if (!isset($_SESSION['usuario'])) {
-    
-    header('Location: login.php');
-    exit();
+    if (!isset($_SESSION['usuario'])) {
+        header('Location: login.php');
+    }
 }
-

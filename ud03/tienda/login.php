@@ -6,8 +6,9 @@ function comprobar_usuario($email, $pass)
     $conexion = get_conexion();
     seleccionar_bd_tienda($conexion);
     $user = getUsuario($conexion, $email, $pass);
-    
+
     if ($user !== null) {
+        session_start();
         $_SESSION['usuario'] = $user;
         header('Location:index.php');        
     } else {
@@ -37,7 +38,7 @@ if (isset($_POST['email'], $_POST['contrasenha'])) {
 
 <body>
     <h2>Login de usuarios registrados:</h2><br>
-    <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method='post'>
+    <form action='<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>' method='post'>
         <label for='lemail'>email:</label>
         <input type='email' id='email' name='email'><br><br>
         <label for='lcontrasenha'>Contraseña:</label>

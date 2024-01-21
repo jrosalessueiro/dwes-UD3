@@ -1,5 +1,4 @@
 <?php
-session_start();
 include('funciones.php');
 usuario();
 ?>
@@ -26,7 +25,7 @@ usuario();
 
     ?>
     <h1>Tienda IES San Clemente</h1>
-    <h2>Bienvenido, <?php echo $_SESSION['usuario']; ?>!</h2>
+    <h2>Bienvenido, <?php echo $_SESSION['usuario']['nombre']; ?>!</h2>
     <script src='https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js' integrity='sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3' crossorigin='anonymous'>
     </script>
     <p>
