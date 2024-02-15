@@ -56,20 +56,6 @@ class Empleado {
     }
 }
 
+?>
 
 
-
-
-
-
-
-
-/*Crea una clase Operario en un fichero Operario.php que sea clase hija de Empleado. Con las siguientes características:
-
-Tendrá una propiedad privada “turno”.
-
-Deberá ejecutar el constructor de la clase padre añadiendo la variable turno.
-
-Crear el setter para turno. Los valores para esta variable sólo pueden ser “diurno” o “nocturno”.
-
-Crear objetos en un fichero EmpleadoTest.php y OperarioTest.php que permitan comprobar todos los apartados anteriores.*/
