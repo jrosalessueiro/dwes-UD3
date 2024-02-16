@@ -8,7 +8,11 @@ class Arbitro extends Participante{
         $this->anosArbitraje=$anosArbitraje;
     }
 
-    public function getPosicion(){
+    public function getAnosArbitraje(){
         return $this->anosArbitraje;
+    }
+
+    public function setAnosArbitraje($anosArbitraje){
+        $this->anosArbitraje=$anosArbitraje;
     }
 }

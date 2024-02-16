@@ -12,4 +12,8 @@ class Jugador extends Participante{
     public function getPosicion(){
         return $this->posicion;
     }
+
+    public function setPosicion($posicion){
+        $this->posicion=$posicion;
+    }
 }

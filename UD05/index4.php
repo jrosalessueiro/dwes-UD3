@@ -31,5 +31,13 @@ public function getEdad(){
     return $this->edad;
 }
 
+public function setEdad($edad){
+    $this->edad=$edad;
+}
+
+public function setNombre($nombre){
+    $this->nombre=$nombre;
+}
+
 
 }
