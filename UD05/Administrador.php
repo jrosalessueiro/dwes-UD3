@@ -1,8 +1,10 @@
 <?php
-include('Persona.php');
 
 class Administrador extends Persona{
-    
+    public function __construct($id,$nombre,$apellidos){
+        $this->nombre=$nombre;
+        $this->apellidos=$apellidos;
+    }
     public function getNombre(){
         return $this->nombre;
     }
@@ -15,12 +17,10 @@ class Administrador extends Persona{
     public function setApellidos($apellidos){
         $this->apellidos=$apellidos;
     }
-    public function __construct($id,$nombre,$apellidos){
-        parent::__construct($id,$nombre,$apellidos);
-    }
+    
     public function accion(){
-        echo 'Nombre: '. self::getNombre().'<br>';
-        echo 'Apellidos: '. self::getApellidos().'<br>';
-        echo 'Soy un Administrador.<br>';
+        echo 'Nombre: '. $this->getNombre().'<br>';
+        echo 'Apellidos: '. $this->getApellidos().'<br>';
+        echo 'Soy un Administrador.<br><br>';
     }
 }

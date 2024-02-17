@@ -1,7 +1,10 @@
 <?php
-include('Persona.php');
 
 class Usuario extends Persona{
+    public function __construct($id,$nombre,$apellidos){
+        $this->nombre=$nombre;
+        $this->apellidos=$apellidos;
+    }
     public function getNombre(){
         return $this->nombre;
     }
@@ -14,12 +17,10 @@ class Usuario extends Persona{
     public function setApellidos($apellidos){
         $this->apellidos=$apellidos;
     }
-    public function __construct($id,$nombre,$apellidos){
-        parent::__construct($id,$nombre,$apellidos);
-    }
+    
     public function accion(){
-        echo 'Nombre: '. self::$nombre.'<br>';
-        echo 'Apellidos: '. self::$apellidos.'<br>';
-        echo 'Soy un Usuario.<br>';
+        echo 'Nombre: '. $this->getNombre().'<br>';
+        echo 'Apellidos: '. $this->getApellidos().'<br>';
+        echo 'Soy un Usuario.<br><br>';
     }
 }
