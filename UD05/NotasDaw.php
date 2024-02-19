@@ -7,7 +7,11 @@ class NotasDaw extends Notas implements CalculosCentrosEstudios
     public $numAprobados = 0;
     public $numSuspensos = 0;
     public $media = 0;
-    public $num = 0;
+    public $num = 1;
+
+    public function __construct($notas){
+        $this->notas=$notas;
+    }
 
     public function toString(){
         $listaDeNotas = "";
@@ -39,6 +43,10 @@ class NotasDaw extends Notas implements CalculosCentrosEstudios
         }
         $this->media=array_sum($this->notas)/$this->num;
         return $this->media;
+    }
+
+    public function get_notas(){
+        return $this->notas;
     }
 }
 
