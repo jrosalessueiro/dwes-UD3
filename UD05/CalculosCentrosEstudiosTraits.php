@@ -1,25 +1,19 @@
 <?php
-include('Notas.php');
-include('CalculosCentrosEstudios.php');
+/*Cree un Trait llamado CalculosCentroEstudios con las mismas funciones que la interfaz del ejercicio anterior.
 
-class NotasDaw extends Notas implements CalculosCentrosEstudios
-{
-    public $numAprobados = 0;
-    public $numSuspensos = 0;
-    public $media = 0;
-    public $num = 1;
+Cree otro Trait denominado MostrarCalculos con dos funciones:
 
-    public function __construct($notas){
-        $this->notas=$notas;
-    }
+la función de saludo que muestra “Bienvenido al centro de cálculo”
 
-    public function toString(){
-        $listaDeNotas = "";
-        foreach ($this->get_notas() as $nota) {
-            $listaDeNotas .= "[$nota]";
-        }
-        return $listaDeNotas;
-    }
+la función showCalculusStudyCenter, que recibe el número de aprobados, suspensos y la calificación promedio y 
+los muestra en la pantalla dándoles formato.
+
+Crea cada Trait en un fichero diferente.
+
+Cree una clase llamada NotasTrait que use los dos traits anteriores.
+Escriba el código correspondiente para “probar” el código anterior en un fichero NotasTrait.php.*/
+
+trait CalculosCentroEstudios{
     public function numeroDeAprobados(){
         foreach ($this->notas as $nota) {
             if ($nota >= 5) {
@@ -28,6 +22,7 @@ class NotasDaw extends Notas implements CalculosCentrosEstudios
         }
         return $this->numAprobados;
     }
+
     public function numeroDeSuspensos(){
         foreach ($this->notas as $nota) {
             if ($nota < 5) {
@@ -44,9 +39,4 @@ class NotasDaw extends Notas implements CalculosCentrosEstudios
         $this->media=array_sum($this->notas)/$this->num;
         return number_format($this->media, 2, ',', ' ');
     }
-
-    public function get_notas(){
-        return $this->notas;
-    }
 }
-
